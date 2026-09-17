@@ -3,11 +3,12 @@ package ru.nsu.nexlly;
 import java.util.Arrays;
 
 public class HeapSort {
-    /*
-     Сортирует массив по возрастанию пирамидальной сортировкой.
-     1) Строит из массива max-кучу (наибольший элемент в корне).
-     2) Раз за разом меняет корень (максимум) с последним элементом
-        неотсортированной части, уменьшает размер кучи и восстанавливает её.
+
+    /**
+     * Сортирует массив по возрастанию пирамидальной сортировкой (in-place).
+     * 1) Строит из массива max-кучу (наибольший элемент в корне).
+     * 2) Раз за разом меняет корень (максимум) с последним элементом
+     *    неотсортированной части, уменьшает размер кучи и восстанавливает её.
      */
     public static void heapsort(int[] a) {
         int n = a.length;
@@ -26,9 +27,10 @@ public class HeapSort {
         }
     }
 
-    /*
-     Восстанавливает свойство max-кучи для поддерева с корнем в i
-     (в пределах первых size элементов).
+    /**
+     * Просеивание вниз: опускает элемент a[i] вниз по куче,
+     * пока он не станет больше обоих потомков.
+     * Рассматриваются только первые size элементов массива.
      */
     private static void siftDown(int[] a, int i, int size) {
         while (true) {
@@ -39,7 +41,7 @@ public class HeapSort {
             if (left < size && a[left] > a[largest]) largest = left;
             if (right < size && a[right] > a[largest]) largest = right;
 
-           // Узел уже больше потомков — свойство кучи выполнено.
+            // Узел уже больше потомков — свойство кучи выполнено.
             if (largest == i) return;
 
             // Меняем с наибольшим потомком и продолжаем спуск.
@@ -48,17 +50,22 @@ public class HeapSort {
         }
     }
 
-    // Меняет местами элементы a[i] и a[j].
+    /**
+     * Меняет местами элементы a[i] и a[j].
+     */
     private static void swap(int[] a, int i, int j) {
         int tmp = a[i];
         a[i] = a[j];
         a[j] = tmp;
     }
 
+    /**
+     * Точка входа: сортирует тестовый массив и выводит результат.
+     */
     public static void main(String[] args) {
         int[] arr = new int[] {5, 4, 3, 2, 1};
         heapsort(arr);
 
-        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr)); // [1, 2, 3, 4, 5]
     }
 }
