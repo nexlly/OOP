@@ -2,7 +2,7 @@ package ru.nsu.blackjack;
 
 import java.util.Objects;
 
-public class Card {
+public final class Card {
     private final Rank rank;
     private final Suit suit;
 
